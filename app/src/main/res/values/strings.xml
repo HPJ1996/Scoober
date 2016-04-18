@@ -18,8 +18,11 @@
     <string name="personal_info">Personal Information</string>
      <string name="record">Record</string> 
     <string name="problem_report">Problem Report</string>
-     <string name="about">About</string>
-     <string name="log_out">Log out</string>
-     <string name="title_activity_maps">Map</string>
+     
+    <string name="about">About</string>
+     
+    <string name="log_out">Log out</string>
+     
+    <string name="title_activity_maps">Map</string>
 
 </resources>

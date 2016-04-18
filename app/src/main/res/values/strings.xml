@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">Scoober</string>
+    <string name="app_name">scoober</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="prompt_account">Email or phone</string>
+    <string name="prompt_password">Password</string>
+    <string name="register_name">Name</string>
+    <string name="register_account">Email or phone</string>
+    <string name="register_password">Password</string>
+    <string name="register_twice_password">Please input password again</string>
+    <string name="action_register">register</string>
+    <string name="title_activity_side">SideActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="personal_info">Personal Information</string>
+     <string name="record">Record</string> 
+    <string name="problem_report">Problem Report</string>
+     <string name="about">About</string>
+     <string name="log_out">Log out</string>
+     <string name="title_activity_maps">Map</string>
+
 </resources>

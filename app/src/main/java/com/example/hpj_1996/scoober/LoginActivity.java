@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
         public void onClick(View v) {
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this, MapsActivity.class);
+            intent.setClass(LoginActivity.this, SideActivity.class);
 //            intent.putExtra(ACCOUNT, account.getText().toString());
 //            intent.putExtra(PASSWORD, password.getText().toString());
 

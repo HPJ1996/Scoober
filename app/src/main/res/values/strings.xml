@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">scoober</string>
+    <string name="app_name">Scoober</string>
     <string name="action_sign_in">Sign In</string>
     <string name="prompt_account">Email or phone</string>
     <string name="prompt_password">Password</string>

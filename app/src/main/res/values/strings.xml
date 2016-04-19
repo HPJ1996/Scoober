@@ -24,5 +24,10 @@
     <string name="log_out">Log out</string>
      
     <string name="title_activity_maps">Map</string>
+    <string name="about_ver">當前版本</string>
+    <string name="about_ver_value">beta 1.0</string>
+    <string name="about_official">官方網站</string>
+    <string name="about_mail">連絡我們</string>
+    <string name="about_group">聊天群組</string>
 
 </resources>

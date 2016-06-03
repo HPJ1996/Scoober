@@ -1,8 +1,11 @@
 package com.example.hpj_1996.scoober;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -78,22 +81,43 @@ public class SideActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.personal_info) {
-            // Handle the camera action
-        } else if (id == R.id.record) {
-
-        } else if (id == R.id.problem_report) {
-
-        } else if (id == R.id.about) {
-
-        } else if (id == R.id.log_out) {
-
+        switch(item.getItemId()){
+            case R.id.personal_info:
+                break;
+            case R.id.record:
+                break;
+            case R.id.problem_report:
+                Intent intent = new Intent();
+                intent.setClass(this, ProblemReport.class);
+                startActivity(intent);
+                break;
+            case R.id.about:
+                showAbout();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private String aboutMessage(){
+        return "Author: \n" + "Release: \n";
+    }
+
+    private void showAbout(){
+        AlertDialog.Builder ad = new AlertDialog.Builder(this);
+        ad.setTitle("About");
+        ad.setMessage(aboutMessage());
+
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface di, int i){}
+        };
+
+        ad.setPositiveButton("Correct", listener);
+        ad.show();
+    }
+
+
 }

@@ -75,16 +75,19 @@ public class SideActivity extends AppCompatActivity
 
         switch(item.getItemId()){
             case R.id.personal_info:
-                startActivity(new Intent().setClass(this, PersonalInfoActivity.class));
+                startActivity(new Intent().setClass(SideActivity.this, PersonalInfoActivity.class));
                 break;
             case R.id.record:
-                startActivity(new Intent().setClass(this, RecordActivity.class));
+                startActivity(new Intent().setClass(SideActivity.this, RecordActivity.class));
                 break;
             case R.id.problem_report:
-                startActivity(new Intent().setClass(this, AboutActivity.class));
+                startActivity(new Intent().setClass(SideActivity.this, AboutActivity.class));
                 break;
             case R.id.about:
-                startActivity(new Intent().setClass(this, AboutActivity.class));
+                startActivity(new Intent().setClass(SideActivity.this, AboutActivity.class));
+                break;
+            case R.id.log_out:
+                finish();
                 break;
         }
 

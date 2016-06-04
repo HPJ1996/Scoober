@@ -3,7 +3,6 @@ package com.example.hpj_1996.scoober;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 
 public class PersonalInfoActivity extends AppCompatActivity {

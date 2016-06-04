@@ -3,6 +3,7 @@ package com.example.hpj_1996.scoober;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +17,7 @@ import android.widget.Button;
 
 public class SideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Button locate;
+//    Button locate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,8 @@ public class SideActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        locate = (Button)findViewById(R.id.locate);
-        locate.setOnClickListener(locateListener);
+//        locate = (Button)findViewById(R.id.locate);
+//        locate.setOnClickListener(locateListener);
     }
 
     @Override
@@ -116,10 +117,10 @@ public class SideActivity extends AppCompatActivity
         return true;
     }
 
-    private View.OnClickListener locateListener = new View.OnClickListener() {
-
-        public void onClick(View v) {
-            startActivity(new Intent().setClass(SideActivity.this, MapsActivity.class));
-        }
-    };
+//    private View.OnClickListener locateListener = new View.OnClickListener() {
+//
+//        public void onClick(View v) {
+//            startActivity(new Intent().setClass(SideActivity.this, MapsActivity.class));
+//        }
+//    };
 }

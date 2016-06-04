@@ -8,10 +8,10 @@
     tools:context="com.example.hpj_1996.scoober.SideActivity"
     tools:showIn="@layout/app_bar_side">
 
-    <Button android:id="@+id/locate"
-        android:background="#FFFFFF"
-        android:text="Locate"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<Button android:id="@+id/locate"-->
+        <!--android:background="#FFFFFF"-->
+        <!--android:text="Locate"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
 </FrameLayout>

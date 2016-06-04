@@ -74,9 +74,9 @@ public class LoginActivity extends AppCompatActivity {
     private View.OnClickListener loginListener = new View.OnClickListener() {
 
         public void onClick(View v) {
-            if(!checkAccount(account.getText().toString(), password.getText().toString())) {
-                return;
-            }
+//            if(!checkAccount(account.getText().toString(), password.getText().toString())) {
+//                return;
+//            }
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, SideActivity.class);
             intent.putExtra("account", account.getText().toString());

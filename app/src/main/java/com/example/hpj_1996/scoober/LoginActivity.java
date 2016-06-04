@@ -80,9 +80,13 @@ public class LoginActivity extends AppCompatActivity {
     private View.OnClickListener loginListener = new View.OnClickListener() {
 
         public void onClick(View v) {
-            //if(!checkAccount(account.getText().toString(), password.getText().toString()))return;
+//            if(!checkAccount(account.getText().toString(), password.getText().toString())) {
+//                return;
+//            }
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, SideActivity.class);
+            intent.putExtra(ACCOUNT, account.getText().toString());
+
             startActivity(intent);
         }
     };
@@ -97,8 +101,7 @@ public class LoginActivity extends AppCompatActivity {
 
             db.insert(ACCOUNT_TABLE, null, cv);
 
-            Cursor cursor = db.rawQuery("select * from " +
-                    ACCOUNT_TABLE, null);
+            Cursor cursor = db.rawQuery("select * from " + ACCOUNT_TABLE, null);
 
             cursor.moveToFirst();
             for (int i = 0; i < cursor.getCount(); i++) {
@@ -112,8 +115,7 @@ public class LoginActivity extends AppCompatActivity {
     };
 
     private boolean checkAccount(String account, String password){
-        SharedPreferences pref = getSharedPreferences(account,
-                MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(account, MODE_PRIVATE);
         if(pref.getString(password, "").equals("")){
             errorMessage.setText("Account or password error!");
             return false;

@@ -2,6 +2,7 @@ package com.example.hpj_1996.scoober;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -81,7 +82,11 @@ public class SideActivity extends AppCompatActivity
                 startActivity(new Intent().setClass(SideActivity.this, RecordActivity.class));
                 break;
             case R.id.problem_report:
-                startActivity(new Intent().setClass(SideActivity.this, AboutActivity.class));
+                Uri uri = Uri.parse("http://scoober.loliloli.asia");
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(uri);
+                startActivity(intent);
                 break;
             case R.id.about:
                 startActivity(new Intent().setClass(SideActivity.this, AboutActivity.class));

@@ -1,12 +1,8 @@
 package com.example.hpj_1996.scoober;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,9 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class SideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Button locate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,9 @@ public class SideActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        locate = (Button)findViewById(R.id.locate);
+        locate.setOnClickListener(locateListener);
     }
 
     @Override
@@ -74,16 +75,19 @@ public class SideActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
+        Intent intent;
         switch(item.getItemId()){
             case R.id.personal_info:
-                startActivity(new Intent().setClass(SideActivity.this, PersonalInfoActivity.class));
+                intent = this.getIntent();
+                intent.setClass(SideActivity.this, PersonalInfoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.record:
                 startActivity(new Intent().setClass(SideActivity.this, RecordActivity.class));
                 break;
             case R.id.problem_report:
                 Uri uri = Uri.parse("http://scoober.loliloli.asia");
-                Intent intent = new Intent();
+                intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(uri);
                 startActivity(intent);
@@ -100,4 +104,11 @@ public class SideActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private View.OnClickListener locateListener = new View.OnClickListener() {
+
+        public void onClick(View v) {
+            startActivity(new Intent().setClass(SideActivity.this, MapsActivity.class));
+        }
+    };
 }

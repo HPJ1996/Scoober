@@ -37,19 +37,13 @@ public class LoginActivity extends AppCompatActivity {
     private EditText registerTwicePassword;
     private Button registerButton;
 
-    //Data base keys
-    public final static String NAME = "NAME";
-    public final static String ACCOUNT = "ACCOUNT";
-    public final static String PASSWORD = "PASSWORD";
-    public final static String REGISTER_ACCOUNT = "REGISTER_ACCOUNT";
+    //Data base
     public final static String ACCOUNT_TABLE = "ACCOUNT_TABLE";
     public final static String CREATETABLE = "create table " +
             ACCOUNT_TABLE + "(name, account, password);";
 
     private SQLiteDatabase db;
     private DBOpenHelper openhelper;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, SideActivity.class);
-            intent.putExtra(ACCOUNT, account.getText().toString());
+            intent.putExtra("account", account.getText().toString());
 
             startActivity(intent);
         }
@@ -95,19 +89,15 @@ public class LoginActivity extends AppCompatActivity {
 
         public void onClick(View v) {
             ContentValues cv = new ContentValues();
-            cv.put(ACCOUNT, registerAccount.getText().toString());
-            cv.put(NAME, registerName.getText().toString());
-            cv.put(PASSWORD, registerPassword.getText().toString());
+            cv.put("name", registerName.getText().toString());
+            cv.put("account", registerAccount.getText().toString());
+            cv.put("password", registerPassword.getText().toString());
+
+            Log.d("register", "name: " + cv.get("name"));
+            Log.d("register", "account: " + cv.get("account"));
+            Log.d("register", "password: " + cv.get("password"));
 
             db.insert(ACCOUNT_TABLE, null, cv);
-
-            Cursor cursor = db.rawQuery("select * from " + ACCOUNT_TABLE, null);
-
-            cursor.moveToFirst();
-            for (int i = 0; i < cursor.getCount(); i++) {
-                Log.d("db",cursor.getString(0));
-                cursor.moveToNext();
-            }
 
             tabHost.setCurrentTab(0);
             Toast.makeText(LoginActivity.this,"Complete register!", Toast.LENGTH_SHORT).show();
@@ -115,12 +105,19 @@ public class LoginActivity extends AppCompatActivity {
     };
 
     private boolean checkAccount(String account, String password){
-        SharedPreferences pref = getSharedPreferences(account, MODE_PRIVATE);
-        if(pref.getString(password, "").equals("")){
-            errorMessage.setText("Account or password error!");
-            return false;
+        Cursor cursor = db.rawQuery("select * from " + ACCOUNT_TABLE, null);
+
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            if(cursor.getString(1).equals(account)){
+                if(cursor.getString(2).equals(password)){
+                    return true;
+                }else break;
+            }
+            cursor.moveToNext();
         }
-        return true;
+        errorMessage.setText("Account or password error!");
+        return false;
     }
 
 
@@ -141,20 +138,21 @@ public class LoginActivity extends AppCompatActivity {
         tabHost.setCurrentTab(0);
     }
 
-    class DBOpenHelper extends SQLiteOpenHelper {
 
-        public DBOpenHelper(Context context) {
-            super(context, "accounts.db", null, 1);
-        }
+}
 
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATETABLE);
-        }
+class DBOpenHelper extends SQLiteOpenHelper {
+    public DBOpenHelper(Context context) {
+        super(context, "accounts.db", null, 1);
+    }
 
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
-        }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(LoginActivity.CREATETABLE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
     }
 }
 

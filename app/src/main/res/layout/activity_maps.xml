@@ -5,4 +5,7 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    map:cameraZoom="15"
+    map:cameraTargetLat="24.178743"
+    map:cameraTargetLng="120.644048"
     tools:context="com.example.hpj_1996.scoober.MapsActivity" />

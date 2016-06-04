@@ -28,7 +28,7 @@ public class AboutActivity extends AppCompatActivity {
                 "mailto:scoober@loliloli.asia");
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        Intent intent1 = intent.setData(uri);
+        intent = intent.setData(uri);
         startActivity(intent);
     }
 

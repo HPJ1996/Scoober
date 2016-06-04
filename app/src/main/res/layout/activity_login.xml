@@ -26,7 +26,7 @@
                 android:orientation="vertical">
 
                 <AutoCompleteTextView
-                    android:id="@+id/prompt_account"
+                    android:id="@+id/account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_account"
@@ -42,6 +42,11 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true" />
+                <TextView
+                    android:id="@+id/error_message"
+                    android:textColor="#FF0000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
                 <Button

@@ -26,15 +26,6 @@ public class SideActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -84,16 +75,16 @@ public class SideActivity extends AppCompatActivity
 
         switch(item.getItemId()){
             case R.id.personal_info:
+                startActivity(new Intent().setClass(this, PersonalInfoActivity.class));
                 break;
             case R.id.record:
+                startActivity(new Intent().setClass(this, RecordActivity.class));
                 break;
             case R.id.problem_report:
-                Intent intent = new Intent();
-                intent.setClass(this, ProblemReport.class);
-                startActivity(intent);
+                startActivity(new Intent().setClass(this, AboutActivity.class));
                 break;
             case R.id.about:
-                showAbout();
+                startActivity(new Intent().setClass(this, AboutActivity.class));
                 break;
         }
 
@@ -101,23 +92,4 @@ public class SideActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    private String aboutMessage(){
-        return "Author: \n" + "Release: \n";
-    }
-
-    private void showAbout(){
-        AlertDialog.Builder ad = new AlertDialog.Builder(this);
-        ad.setTitle("About");
-        ad.setMessage(aboutMessage());
-
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface di, int i){}
-        };
-
-        ad.setPositiveButton("Correct", listener);
-        ad.show();
-    }
-
-
 }

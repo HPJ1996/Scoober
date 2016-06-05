@@ -51,8 +51,8 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <Button android:id="@+id/apply_personal_info"
-        android:text="apply"
+    <Button android:id="@+id/modify_personal_info"
+        android:text="modify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

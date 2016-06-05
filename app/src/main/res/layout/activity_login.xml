@@ -43,7 +43,7 @@
                     android:maxLines="1"
                     android:singleLine="true" />
                 <TextView
-                    android:id="@+id/error_message"
+                    android:id="@+id/login_error_message"
                     android:textColor="#FF0000"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -99,6 +99,11 @@
                     android:maxLines="1"
                     android:singleLine="true" />
 
+                <TextView
+                    android:id="@+id/register_error_message"
+                    android:textColor="#FF0000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <Button
                     android:id="@+id/action_register"

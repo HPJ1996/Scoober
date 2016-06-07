@@ -43,7 +43,8 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".PersonalInfoActivity" />
-        <activity android:name=".RecordActivity"></activity>
+        <activity android:name=".RecordActivity" />
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>

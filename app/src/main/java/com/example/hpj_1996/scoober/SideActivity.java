@@ -98,10 +98,8 @@ public class SideActivity extends AppCompatActivity
                 startActivity(new Intent().setClass(SideActivity.this, RecordActivity.class));
                 break;
             case R.id.problem_report:
-                Uri uri = Uri.parse("http://scoober.loliloli.asia");
-                intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(uri);
+                intent = this.getIntent();
+                intent.setClass(SideActivity.this, WebActivity.class);
                 startActivity(intent);
                 break;
             case R.id.about:

@@ -40,7 +40,6 @@ public class SideActivity extends AppCompatActivity
     private double longitude = 120.648274;
     private double latitude = 24.179955;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,13 +83,6 @@ public class SideActivity extends AppCompatActivity
         long minTime = 5000;//ms
         float minDist = 5.0f;//meter
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         locationMgr.requestLocationUpdates(provider, minTime, minDist, locationListener);
@@ -205,22 +197,26 @@ public class SideActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        GoogleMap mMap = googleMap;
+        final GoogleMap mMap = googleMap;
 
-        LatLng defaultLocate = new LatLng(24.179955, 120.648274);
+        final LatLng defaultLocate = new LatLng(24.179955, 120.648274);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(defaultLocate));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         mMap.setMyLocationEnabled(true);
+
+        FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.fab_location);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LatLng nowLocate = new LatLng(latitude, longitude);
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(nowLocate));
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+            }
+        });
     }
 }

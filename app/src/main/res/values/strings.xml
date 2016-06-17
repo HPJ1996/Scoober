@@ -1,33 +1,39 @@
 <resources>
     <string name="app_name">Scoober</string>
-    <string name="action_sign_in">Sign In</string>
-    <string name="prompt_account">Email or phone</string>
-    <string name="prompt_password">Password</string>
-    <string name="register_name">Name</string>
-    <string name="register_account">Email or phone</string>
-    <string name="register_password">Password</string>
-    <string name="register_twice_password">Please input password again</string>
-    <string name="action_register">register</string>
-    <string name="title_activity_side">SideActivity</string>
+    <string name="action_sign_in">登入</string>
+    <string name="prompt_account">Email 或 電話</string>
+    <string name="prompt_password">密碼</string>
+    <string name="register_name">姓名</string>
+    <string name="register_account">Email 或 電話</string>
+    <string name="register_password">密碼</string>
+    <string name="register_twice_password">請再次輸入密碼</string>
+    <string name="action_register">註冊</string>
+    <string name="title_activity_side">Scoober</string>
+    <!--<string name="title_activity_side">SideActivity</string>-->
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">設定</string>
 
-    <string name="personal_info">Personal Information</string>
-     <string name="record">Record</string> 
-    <string name="problem_report">Problem Report</string>
+    <string name="personal_info">個人資料</string>
+     <string name="record">記錄</string> 
+    <string name="problem_report">問題回報</string>
      
-    <string name="about">About</string>
+    <string name="about">關於</string>
      
-    <string name="log_out">Log out</string>
+    <string name="log_out">登出</string>
      
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">地圖</string>
     <string name="about_ver">當前版本</string>
     <string name="about_ver_value">beta 1.0</string>
     <string name="about_official">官方網站</string>
     <string name="about_mail">連絡我們</string>
     <string name="about_group">聊天群組</string>
+
+    <string name="send_location">已傳送位置</string>
+    <string name="longitude">經度：</string>
+    <string name="latitude">緯度：</string>
+    <string name="ok">OK</string>
 
 </resources>

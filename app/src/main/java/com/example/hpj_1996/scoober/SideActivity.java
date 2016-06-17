@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -36,8 +37,8 @@ public class SideActivity extends AppCompatActivity
     /** GPS */
     private LocationManager locationMgr;
     private String provider;
-    private double longitude;
-    private double latitude;
+    private double longitude = 120.648274;
+    private double latitude = 24.179955;
 
 
     @Override
@@ -59,6 +60,9 @@ public class SideActivity extends AppCompatActivity
             }
         });
 
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -68,6 +72,7 @@ public class SideActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (locationMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {

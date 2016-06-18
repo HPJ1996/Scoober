@@ -14,9 +14,8 @@ import android.widget.Toast;
 public class PersonalInfoActivity extends AppCompatActivity {
 
     private EditText editName;
-    private EditText editAccount;
-    private TextView fixPassword;
-    private SQLiteDatabase db;
+    private TextView fixAccount;
+    private EditText editPassword;
     private Button modifyPersonalInfo;
     private AccountDataBase accountDataBase;
     private String account;
@@ -28,8 +27,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_info);
 
         editName = (EditText)findViewById(R.id.edit_name);
-        editAccount = (EditText)findViewById(R.id.edit_account);
-        fixPassword = (TextView)findViewById(R.id.fix_password);
+        fixAccount = (TextView) findViewById(R.id.fix_account);
+        editPassword = (EditText)findViewById(R.id.edit_password);
         modifyPersonalInfo = (Button)findViewById(R.id.modify_personal_info);
         accountDataBase = new AccountDataBase(this);
 
@@ -38,21 +37,23 @@ public class PersonalInfoActivity extends AppCompatActivity {
             accountCursor = accountDataBase.findAccount(account);
             modifyPersonalInfo.setOnClickListener(new ModifyListener());
 
-            //set personal info
+            //initializing personal info messages
             editName.setText(accountCursor.getString(0));
-            editAccount.setText(accountCursor.getString(1));
-            fixPassword.setText(accountCursor.getString(2));
+            fixAccount.setText(accountCursor.getString(1));
+            editPassword.setText(accountCursor.getString(2));
         }catch (NotFoundAccountException e){
             Log.d("error", e.getMessage());
         }
     }
 
     class ModifyListener implements View.OnClickListener{
-
         public void onClick(View v){
+            String name = editName.getText().toString();
+            String account = fixAccount.getText().toString();
+            String password = editPassword.getText().toString();
+
             try{
-                accountDataBase.updateAccount(editName.getText().toString(),
-                        editAccount.getText().toString());
+                accountDataBase.updateAccount(name, account, password);
                 finish();
             }catch(UpdateFailedException e){
                 Toast.makeText(PersonalInfoActivity.this,

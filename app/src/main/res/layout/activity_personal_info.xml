@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="name: "
+            android:text="姓名： "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <EditText
@@ -28,11 +28,11 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="account: "
+            android:text="帳戶： "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <EditText
-            android:id="@+id/edit_account"
+        <TextView
+            android:id="@+id/fix_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -42,17 +42,17 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="password: "
+            android:text="密碼： "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/fix_password"
+        <EditText
+            android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <Button android:id="@+id/modify_personal_info"
-        android:text="modify"
+        android:text="修改"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

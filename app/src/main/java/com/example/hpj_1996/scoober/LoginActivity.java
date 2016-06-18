@@ -24,13 +24,13 @@ public class LoginActivity extends AppCompatActivity {
 
     TabHost tabHost;
 
-    //Login-component
+    //Login components
     private Button loginButton;
     private AutoCompleteTextView account;
     private EditText password;
     private TextView loginErrorMessage;
 
-    //Register-component
+    //Register components
     private EditText registerName;
     private AutoCompleteTextView registerAccount;
     private EditText registerPassword;
@@ -49,14 +49,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         setTab();
 
-        //Login-component
+        //Login components
         account = (AutoCompleteTextView)findViewById(R.id.account);
         password = (EditText)findViewById(R.id.password);
         loginButton = (Button)findViewById(R.id.action_sign_in);
         loginButton.setOnClickListener(loginListener);
         loginErrorMessage = (TextView)findViewById(R.id.login_error_message);
 
-        //Register-component
+        //Register components
         registerAccount = (AutoCompleteTextView)findViewById(R.id.register_account);
         registerName = (EditText)findViewById(R.id.register_name);
         registerPassword = (EditText)findViewById(R.id.register_password);
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("account", account.getText().toString());
             startActivity(intent);
         }else{
-            loginErrorMessage.setText("Account or password error!");
+            loginErrorMessage.setText("帳戶或密碼錯誤！");
         }
         }
     };
@@ -90,11 +90,14 @@ public class LoginActivity extends AppCompatActivity {
         String name = registerName.getText().toString();
         String account = registerAccount.getText().toString();
         String password = registerPassword.getText().toString();
+        String twicePassword = registerTwicePassword.getText().toString();
 
         try{
+            if(!password.equals(twicePassword))
+                throw new RegisterFailedException("密碼與第二次密碼不相符");
             accountDataBase.insertAccount(name, account, password);
             tabHost.setCurrentTab(0);
-            Toast.makeText(LoginActivity.this,"Complete register!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "完成註冊", Toast.LENGTH_SHORT).show();
 
         }catch(RegisterFailedException e){
             registerErrorMessage.setText(e.getMessage());
@@ -109,11 +112,11 @@ public class LoginActivity extends AppCompatActivity {
 
         TabHost.TabSpec tabSpec = tabHost.newTabSpec("login");
         tabSpec.setContent(R.id.login);
-        tabSpec.setIndicator("login");
+        tabSpec.setIndicator("登入");
         tabHost.addTab(tabSpec);
 
         tabSpec = tabHost.newTabSpec("register");
-        tabSpec.setIndicator("register");
+        tabSpec.setIndicator("註冊");
         tabSpec.setContent(R.id.register);
         tabHost.addTab(tabSpec);
 
@@ -125,32 +128,47 @@ class AccountDataBase{
     public final static String ACCOUNT_TABLE = "ACCOUNT_TABLE";
     public final static String CREATE_TABLE = "create table " +
             ACCOUNT_TABLE + "(name, account, password);";
+    private Context context;
 
     private SQLiteDatabase database;
 
     public AccountDataBase(Context context){
+        this.context = context;
         DBOpenHelper openhelper = new DBOpenHelper(context);
         database = openhelper.getWritableDatabase();
     }
 
-    public void checkRegisterValid(String name, String account, String password)
+    private void checkRegisterValid(String name, String account, String password)
             throws RegisterFailedException {
         String errorMessage = "";
         if (name.equals("")) {
-            errorMessage += "Name cannot be empty string!\n";
+            errorMessage += "姓名欄不得為空白！\n";
         }
         if (account.equals("")) {
-            errorMessage += "Account cannot be empty string!\n";
+            errorMessage += "帳戶欄不得為空白！\n";
         }
         if (password.equals("")) {
-            errorMessage += "Password cannot be empty string!\n";
+            errorMessage += "密碼欄不得為空白！\n";
         }
         if (existAccount(account)) {
-            errorMessage += "Exist this account\n";
+            errorMessage += "存在相同帳戶！\n";
         }
 
         if (!errorMessage.equals(""))
-            throw new RegisterFailedException(errorMessage);
+            throw new RegisterFailedException(errorMessage.substring(0, errorMessage.length()-1));
+    }
+
+    private void checkUpdateValid(String name, String password) throws UpdateFailedException{
+        String errorMessage = "";
+        if (name.equals("")) {
+            errorMessage += "姓名欄不得為空白！\n";
+        }
+        if (password.equals("")) {
+            errorMessage += "密碼欄不得為空白！\n";
+        }
+
+        if (!errorMessage.equals(""))
+            throw new UpdateFailedException(errorMessage.substring(0, errorMessage.length()-1));
     }
 
     public void insertAccount(String name, String account, String password)
@@ -174,7 +192,7 @@ class AccountDataBase{
             }
             cursor.moveToNext();
         }
-        throw new NotFoundAccountException("Not found account: " + account);
+        throw new NotFoundAccountException("找不到帳戶： " + account);
     }
 
     public boolean existAccount(String account){
@@ -204,21 +222,14 @@ class AccountDataBase{
         return false;
     }
 
-    public void updateAccount(String name, String account)throws UpdateFailedException{
-        if(existAccount(account))throw new UpdateFailedException("exist same account!");
-
-        try{
-            checkRegisterValid(name, account, "xxx");
-        }catch(RegisterFailedException e){
-            throw new UpdateFailedException(e.getMessage());
-        }
-
+    public void updateAccount(String name, String account, String password)throws UpdateFailedException{
+        checkUpdateValid(name, password);
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
-        contentValues.put("account", account);
+        contentValues.put("password", password);
         database.update(ACCOUNT_TABLE, contentValues, "account='" + account + "'", null);
+        Toast.makeText(context, "完成修改", Toast.LENGTH_SHORT).show();
     }
-
 }
 
 class DBOpenHelper extends SQLiteOpenHelper {

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -31,6 +32,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import java.util.ArrayList;
+
 public class SideActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener, OnMapReadyCallback {
 
@@ -39,6 +42,10 @@ public class SideActivity extends AppCompatActivity
     private String provider;
     private double longitude = 120.648274;
     private double latitude = 24.179955;
+
+    ArrayList<String> titlelist;
+    SQLiteDatabase database;
+    int notepos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class SideActivity extends AppCompatActivity
 //                startActivity(intent);
 
                 showSendLocation();
+                recordLocation();
             }
         });
 
@@ -218,5 +226,18 @@ public class SideActivity extends AppCompatActivity
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(17));
             }
         });
+    }
+
+    public void recordLocation() {
+        DataBaseOpenHelper openhelper = new DataBaseOpenHelper(this);
+        database = openhelper.getWritableDatabase();
+
+        titlelist = NoteDatabase.getTitleList(database);
+
+        String messageString = getResources().getString(R.string.longitude) + longitude +
+                "\n" + getResources().getString(R.string.latitude) + latitude;
+
+        NoteDatabase.addNote(database, messageString, "");
+
     }
 }

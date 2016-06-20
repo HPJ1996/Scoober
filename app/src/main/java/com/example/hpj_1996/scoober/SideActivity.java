@@ -45,7 +45,6 @@ public class SideActivity extends AppCompatActivity
 
     ArrayList<String> titlelist;
     SQLiteDatabase database;
-    int notepos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,8 +246,7 @@ public class SideActivity extends AppCompatActivity
 
         titlelist = NoteDatabase.getTitleList(database);
 
-        String messageString = getResources().getString(R.string.longitude) + longitude +
-                "\n" + getResources().getString(R.string.latitude) + latitude;
+        String messageString = getResources().getString(R.string.longitude) + longitude + "\n" + getResources().getString(R.string.latitude) + latitude;
 
         NoteDatabase.addNote(database, messageString, "");
 
